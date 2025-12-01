@@ -1,0 +1,8 @@
+from joblib import dump
+
+model = xgb.XGBClassifier()
+model.fit(X_train, y_train)
+
+dump(model, "model.joblib")
+
+

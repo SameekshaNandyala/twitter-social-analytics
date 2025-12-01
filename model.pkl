@@ -1,0 +1,7 @@
+import xgboost as xgb
+import pickle
+
+model = xgb.XGBClassifier()
+model.fit(X_train, y_train)
+
+pickle.dump(model, open("model.pkl", "wb"))

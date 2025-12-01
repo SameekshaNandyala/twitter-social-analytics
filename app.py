@@ -1,13 +1,13 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import pickle
+from joblib import load
 import xgboost as xgb
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Load Model
-model = pickle.load(open("model.pkl", "rb"))
+# Load Model safely (joblib recommended for ML models)
+model = load("model.joblib")
 
 st.title("🐦 Twitter Social Media Influence Prediction System")
 
@@ -28,7 +28,10 @@ if uploaded:
     # Predict Button
     if st.button("🔍 Predict Influence"):
         try:
-            X = df.drop("Choice", axis=1, errors="ignore")  
+            # Remove target if present
+            X = df.drop("Choice", axis=1, errors="ignore")
+
+            # Make prediction
             predictions = model.predict(X)
 
             df["Predicted_Influencer"] = predictions

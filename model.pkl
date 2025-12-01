@@ -4,4 +4,5 @@ import pickle
 model = xgb.XGBClassifier()
 model.fit(X_train, y_train)
 
-pickle.dump(model, open("model.pkl", "wb"))
+with open("model.pkl", "wb") as f:
+    pickle.dump(model, f)
